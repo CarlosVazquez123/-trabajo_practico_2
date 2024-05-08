@@ -59,9 +59,11 @@ public class Producto {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	
-	
 
-	
-	
+	@Override
+	public String toString() {
+		return "Producto [codigo=" + codigo + ", descripcion=" + descripcion + ", preciouni=" + preciouni
+				+ ", origenfab=" + origenfab + ", categoria=" + categoria + ", estado=" + estado + "]";
+	}
+
 }
