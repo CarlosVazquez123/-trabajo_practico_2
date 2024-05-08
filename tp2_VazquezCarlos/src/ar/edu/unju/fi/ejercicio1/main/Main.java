@@ -5,145 +5,149 @@ import java.util.List;
 import java.util.Scanner;
 
 import ar.edu.unju.fi.ejercicio1.model.Categoria;
-import ar.edu.unju.fi.ejercicio1.model.OrigenFabricacion;
+import ar.edu.unju.fi.ejercicio1.model.OrigenDeFabricacion;
 import ar.edu.unju.fi.ejercicio1.model.Producto;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		List<Producto> almacen = new ArrayList<Producto>();
-		Scanner sc = new Scanner(System.in);
+		Scanner cin = new Scanner(System.in);
+		List<Producto> gondola = new ArrayList();
 		String op;
-		do {
-			System.out.println("----MENU----");
+		do{
+			System.out.println("--MENU--");
 			System.out.println("1-Crear Producto");
 			System.out.println("2-Mostrar Productos");
 			System.out.println("3-Modificar Producto");
 			System.out.println("4-Salir");
-			System.out.print("Ingrese opcion:");
-			op=sc.nextLine();
+			System.out.println("Ingrese Opcion: ");
+			op = cin.nextLine();
+			
 			switch(op) {
-					case "1":   Producto producto = new Producto();
-								crear(producto);
-								almacen.add(producto);
-								break;
-					case "2": 	mostrar(almacen);
-								System.out.print("Presione ENTER para continuar...");
-								sc.nextLine();
-								break;
-					case "3": 	modificar(almacen);
-								break;
-					case "4": System.out.println("Saliendo...");
-								break;
-					default: System.out.println("Opcion Incorrecta");
-						}
-			}while(!op.equals("4"));
-		}
-
-	public static void crear(Producto p)
-	{
-		Scanner sc = new Scanner(System.in);
-		boolean band;
-		System.out.print("Ingrese codigo del Producto: ");
-		p.setCodigo(sc.nextInt());
-		sc.nextLine();
-		System.out.print("Ingrese una breve descripcion del Producto: ");
-		p.setDescripcion(sc.nextLine());
-		System.out.print("Ingrese precio del Producto: ");
-		p.setPrecioUnitario(sc.nextDouble());
-		sc.nextLine();
-		submenu(p);
+			
+			case "1": Producto producto = new Producto();
+					  crear(producto);
+					  gondola.add(producto);
+						break;
+			case "2": mostrar(gondola);
+						System.out.println("Enter para continuar");
+						cin.nextLine();
+						break;
+			case "3": mod(gondola);
+						break;
+			case "4": System.out.println("YENDO...");
+						break;
+			default:System.out.println("Equivocado");
+				
+			}
+			
+		}while(!op.equals("4"));
+		
+		
 	}
-
-	public static void submenu(Producto p)
+	
+	public static void crear(Producto p){
+		Scanner cin = new Scanner(System.in);
+		boolean band;
+		System.out.println("Ingrese Codigo: ");
+		p.setCodigo(cin.nextInt());
+		cin.nextLine();
+		System.out.println("Ingrese Descripcion: ");
+		p.setDescripcion(cin.nextLine());
+		System.out.println("Ingrese Precio Unitario: ");
+		p.setPreciouni(cin.nextInt());
+		cin.nextLine();
+		submenu(p);
+		submenu2(p);
+	}
+	public static void submenu(Producto p) 
 	{
-		Scanner sc = new Scanner(System.in);
-		String op;
-		boolean error;
-		do {
-			error=false;
-			System.out.println("---- Origen de fabricación ------");
+			String op;
+			Scanner cin = new Scanner(System.in);
+			System.out.println("----Origen de Fabricacion----");
 			System.out.println("1 - Argentina");
 			System.out.println("2 - China");
 			System.out.println("3 - Brasil");
-			System.out.println("4 – Uruguay");
-			System.out.println("Elija una opción: ");
-			op=sc.nextLine();
-			switch(op)
-				{
-				case "1":   p.setOrigenfab(OrigenFabricacion.ARGENTINA);
+			System.out.println("4 - Uruguay");
+			System.out.println("Elija una opcion: ");
+			op = cin.nextLine();
+			
+			switch(op) {
+			
+				case "1": p.setOrigenfab(OrigenDeFabricacion.ARGENTINA);
 						break;
-				case "2":	p.setOrigenfab(OrigenFabricacion.CHINA);
+				case "2": p.setOrigenfab(OrigenDeFabricacion.CHINA);
 						break;
-				case "3":	p.setOrigenfab(OrigenFabricacion.BRASIL);
+				case "3": p.setOrigenfab(OrigenDeFabricacion.BRASIL);
 						break;
-				case "4":	p.setOrigenfab(OrigenFabricacion.URUGUAY);
+				case "4": p.setOrigenfab(OrigenDeFabricacion.URUGUAY);
 						break;
-				default: 	System.out.println("Opcion Incorrecta");
-						error=true;
-				}
-		}while(error);
-		do {
-			error=false;
-			System.out.println("------ Categoría ------");
-			System.out.println("1 – Telefonía");
-			System.out.println("2 – Informática");
-			System.out.println("3 – Electro hogar");
-			System.out.println("4 – Herramientas");
-			System.out.println("Elija una opción: ");
-			op=sc.nextLine();
-			switch(op)
-				{
-				case "1":   p.setCategoria(Categoria.TELEFONIA);
+			default:  System.out.println("Equivocado");
+				
+			}
+	}
+	public static void submenu2(Producto p) 
+	{
+			String op;
+			Scanner cin = new Scanner(System.in);
+			System.out.println("----Categoria----");
+			System.out.println("1 - Telefonia");
+			System.out.println("2 - Informatica");
+			System.out.println("3 - Electro Hogar");
+			System.out.println("4 - Herramientas");
+			System.out.println("Elija una opcion: ");
+			op = cin.nextLine();
+			
+			switch(op) {
+			
+				case "1": p.setCategoria(Categoria.TELEFONIA);
 						break;
-				case "2":	p.setCategoria(Categoria.INFORMATICA);
+				case "2": p.setCategoria(Categoria.INFORMATICA);;
 						break;
-				case "3":	p.setCategoria(Categoria.ELECTROHOGAR);
+				case "3": p.setCategoria(Categoria.ELECTROHOGAR);;
 						break;
-				case "4":	p.setCategoria(Categoria.HERRAMIENTAS);
+				case "4": p.setCategoria(Categoria.HERRAMIENTAS);;
 						break;
-				default: 	System.out.println("Opcion Incorrecta");
-						error=true;
-				}
-		}while(error);
+			default:  System.out.println("Equivocado");
+				
+			}
+	}
+	public static void mostrar(List<Producto> gondola)
+	{
+		for(Producto producto: gondola)
+			{
+				System.out.println("Codigo: "+producto.getCodigo());
+				System.out.println("Descripcion: "+producto.getDescripcion());
+				System.out.println("Precio Unitario $: "+producto.getPreciouni());
+				System.out.println("Origen de Fabricacion: "+producto.getOrigenfab());
+				System.out.println("Categoria: "+producto.getCategoria());
+			}
 	}
 	
-	public static void mostrar(List<Producto> almacen)
+	public static void mod(List<Producto> gondola)
 	{
-	System.out.println("Almacen");
-	for(Producto producto: almacen)
-	{
-	System.out.println("");
-	System.out.println("Codigo: "+producto.getCodigo());
-	System.out.println("Descripcion: "+producto.getDescripcion());
-	System.out.println("Precio: $"+producto.getPrecioUnitario());
-	System.out.println("Origen de Fabricacion: "+producto.getOrigenfab());
-	System.out.println("Categoria: "+producto.getCategoria());
-	System.out.println("");
-	}
-	}
-
-	public static void modificar(List<Producto> almacen)
-	{
+		Scanner cin = new Scanner(System.in);
 		int codigo;
-		boolean encontrado=false;
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Ingrese codigo del producto que quiera modificar: ");
-		codigo=sc.nextInt();
-		for(Producto producto: almacen)
-			if(codigo==producto.getCodigo())
+		boolean band = false;
+		System.out.println("Ingrese codigo de producto a modificar:");
+		codigo = cin.nextInt();
+		for(Producto producto: gondola)
+		{
+			if(codigo == producto.getCodigo())
 			{
-				sc.nextLine();
-				System.out.print("Ingrese una breve descripcion del Producto: ");
-				producto.setDescripcion(sc.nextLine());
-				System.out.print("Ingrese precio del Producto: ");
-				producto.setPrecioUnitario(sc.nextDouble());
-				sc.nextLine();
+				band = true;
+				System.out.println("Ingrese Descripcion: ");
+				producto.setDescripcion(cin.nextLine());
+				System.out.println("Ingrese Precio Unitario: ");
+				producto.setPreciouni(cin.nextInt());
+				cin.nextLine();
 				submenu(producto);
-				encontrado=true;
+				submenu2(producto);
 			}
-		if(!encontrado)
-		System.out.println("El codigo no pertence a un producto existente");
+			
+		}
+		if(!band)
+			System.out.println("El codigo no pertenece a un producto existente");
+			
 	}
 }
